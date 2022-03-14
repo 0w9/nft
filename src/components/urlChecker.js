@@ -37,6 +37,7 @@ export default class urlChecker extends Component {
               <form>
                   <h1>Find similar nfts</h1>
                   <input type="text" placeholder="enter image url" id="url"></input>
+                  <input type="file" placeholder="open a file" id="file"></input>
                   <button type="button" onClick={checkUrl}>Check</button>
               </form>
           </div>

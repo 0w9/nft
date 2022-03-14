@@ -9,18 +9,20 @@ export default class urlChecker extends Component {
   render() {
 
       function checkUrl() {
+        const fileInput = document.getElementById('file');
+
+        const form = new FormData();
+        form.append("file", fileInput.files[0]);
+
         const options = {
           method: 'POST',
-          url: 'https://api.nftport.xyz/v0/recommendations/similar_nfts/urls',
+          url: 'https://api.nftport.xyz/v0/recommendations/similar_nfts/files',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': '1970291d-6325-4d02-956e-bf97900bedd7'
+            'Authorization': '1970291d-6325-4d02-956e-bf97900bedd7',
+            'content-type': 'multipart/form-data; boundary=---011000010111000001101001'
           },
-          data: {
-            url: document.getElementById("url").value,
-            page_number: 1,
-            page_size: 50
-          }
+          data: form
         };
 
         axios.request(options).then(function (response) {
@@ -36,11 +38,10 @@ export default class urlChecker extends Component {
           <div>
               <form>
                   <h1>Find similar nfts</h1>
-                  <input type="text" placeholder="enter image url" id="url"></input>
+                  <input type="file" placeholder="open a file" id="file"></input>
+                  <br />
                   <button type="button" onClick={checkUrl}>Check</button>
               </form>
-
-              <input type="file" placeholder="open a file" id="file"></input>
           </div>
       )
   }
